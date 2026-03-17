@@ -32,6 +32,15 @@ def health_check():
     return {"status": "ok"}
 
 
+@app.get("/")
+def read_root():
+    return {
+        "message": "Welcome to the AI Packaging Automation Platform API.",
+        "docs": "Visit /docs for the API documentation.",
+        "health": "Visit /health to check API status."
+    }
+
+
 @app.exception_handler(OperationalError)
 def db_operational_error_handler(_, __):
     return JSONResponse(status_code=503, content={"detail": "Database connection failure"})
